@@ -4,7 +4,10 @@
   "description": "Helping the world move Excel table data into Markdown tables.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "lint": "eslint .",
+    "lint-and-fix": "eslint . --fix",
+    "test": "node test/index.js | node_modules/.bin/tap-spec",
+    "ci": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,13 @@
   "bugs": {
     "url": "https://github.com/matt-jarrett/csv-to-md/issues"
   },
-  "homepage": "https://github.com/matt-jarrett/csv-to-md#readme"
+  "homepage": "https://github.com/matt-jarrett/csv-to-md#readme",
+  "devDependencies": {
+    "eslint": "~4.4.1",
+    "tap-spec": "~4.1.1",
+    "tape": "~4.8.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
 }
