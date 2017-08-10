@@ -4,6 +4,7 @@ const tape = require("tape")
 const csvToMd = require("../src/index.js")
 
 let input
+let expected
 
 const readFile = (filePath) => {
   return new Promise((resolve, reject) => {
@@ -19,25 +20,34 @@ const readFile = (filePath) => {
 
 const getInput = () => {
   const inputPath = "./test/input.csv"
-  input = readFile(inputPath)
-  return input
+  return readFile(inputPath)
 }
 const getExpected = () => {
   const expectedPath = "./test/expected.md"
   return readFile(expectedPath)
 }
 
-const test = (expected) => {
+const test = () => {
   tape("Test csv-to-md", (assert) => {
     assert.plan(1)
-    const actual = csvToMd.csvToMd(input)
+    const actual = csvToMd(input)
     assert.equal(actual, expected, "Converts csv to md as expected")
     assert.end()
   })
 }
 
+const setInput = (data) => {
+  input = data
+}
+
+const setExpected = (data) => {
+  expected = data
+}
+
 getInput()
+  .then((data) => setInput(data))
   .then(() => getExpected())
-  .then((expectedData) => test(expectedData))
+  .then((data) => setExpected(data))
+  .then(() => test())
   // eslint-disable-next-line no-console
   .catch((error) => console.log(error))
