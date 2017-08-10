@@ -1,3 +1,5 @@
-module.exports.csvToMd = (input) => {
+const csvToMd = (input) => {
   return `//TODO ${input}`
 }
+
+module.exports = csvToMd
