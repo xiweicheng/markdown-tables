@@ -47,23 +47,36 @@ const endToEndTest = () => {
 
 const unitTest = () => {
   tape("unit tests", (assert) => {
-    assert.plan(4)
+    assert.plan(5)
 
-    let expected = 2
-    let actual = csvToMd.countOccurrences("JavaScript", "a")
-    assert.equal(actual, expected, "`countOccurrences` positive test")
+    let expected
+    let actual
 
-    expected = 42
-    actual = csvToMd.countOccurrences("JavaScript", "j")
-    assert.notEqual(actual, expected, "`countOccurrences` negative test")
+    expected = 2
+    actual = csvToMd.countOccurrences("JavaScript", "a")
+    assert.equal(actual, expected, "`countOccurrences` test")
+
+    expected = 3
+    actual = csvToMd.getColumnCount("a, b, c")
+    assert.equal(actual, expected, "`getColumnCount` test")
 
     expected = 10
     actual = csvToMd.getLongestElementLength(["Java", "JavaScript", "Ruby"])
-    assert.equal(actual, expected, "`getLongestElementLength` positive test")
+    assert.equal(actual, expected, "`getLongestElementLength` test")
 
-    expected = 42
-    actual = csvToMd.getLongestElementLength(["Java", "JavaScript", "Ruby"])
-    assert.notEqual(actual, expected, "`getLongestElementLength` negative test")
+    expected = 3
+    let testArray = []
+    csvToMd.createColumnArrays(3, testArray)
+    actual = testArray.length
+    assert.equal(actual, expected, "`createColumnArrays` test")
+
+    expected = [["1", "a"], ["2", "b"], ["3", "c"]]
+    const testData = ["1,2,3", "a,b,c"]
+    // TODO Start here - unit test is failing
+    testArray = [[], [], []]
+    csvToMd.pushColumnElementsIntoColumns(testData, 3, testArray)
+    actual = testArray
+    assert.deepEqual(actual, expected, "`pushColumnElementsIntoColumns` test")
 
     assert.end()
   })
