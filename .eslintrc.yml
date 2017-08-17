@@ -117,8 +117,6 @@ rules:
     - error
   no-param-reassign:
     - error
-  no-plusplus:
-    - error
   no-undef:
     - error
   no-underscore-dangle:
@@ -191,3 +189,7 @@ rules:
   wrap-iife:
     - error
     - outside
+
+# Project specific overrides
+  no-plusplus:
+    - off
