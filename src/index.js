@@ -9,11 +9,10 @@ const getColumnCount = (row) => {
 
 const getLongestElementLength = (column) => {
   let longest = 0
-  let elementLength
 
   for (const element of column) {
     if (element) {
-      elementLength = element.length
+      const elementLength = element.length
       if (elementLength > longest) {
         longest = elementLength
       }
@@ -33,14 +32,16 @@ const pushColumnElementsIntoColumns = (rows, numberOfColumns, columns) => {
   for (const row of rows) {
     for (let column = 0; column < numberOfColumns; column++) {
       const element = row.split(",")
-      columns[column].push(element[column])
+      if (element[column]) {
+        columns[column].push(element[column])
+      }
     }
   }
 }
 
 const findTableWidths = (numberOfColumns, columns, columnWidths) => {
   for (let column = 0; column < numberOfColumns; column++) {
-    let longest = getLongestElementLength(columns[column])
+    const longest = getLongestElementLength(columns[column])
     columnWidths.push(longest)
   }
 }
@@ -65,19 +66,22 @@ const csvToMd = (input) => {
 
 module.exports = csvToMd
 module.exports.countOccurrences = countOccurrences
+module.exports.getColumnCount = getColumnCount
 module.exports.getLongestElementLength = getLongestElementLength
+module.exports.createColumnArrays = createColumnArrays
+module.exports.pushColumnElementsIntoColumns = pushColumnElementsIntoColumns
 
-//| Label          | SquareFootage | Color  |
-//|----------------|---------------|--------|
-//| Office         | 224           | Blue   |
-//| Kitchen        | 230           | Green  |
-//| Clothes Closet | 45            | Yellow |
-//| Storage Closet | 56            | Red    |
-//| Bedroom        | 182           | Orange |
-//| Bathroom       | 100           | Teal   |
-//| Living room    | 265           | Grey   |
-//| Coat closet    | 30            | Pink   |
-//| Bike Storage   | 65            | Purple |
+// | Label          | SquareFootage | Color  |
+// |----------------|---------------|--------|
+// | Office         | 224           | Blue   |
+// | Kitchen        | 230           | Green  |
+// | Clothes Closet | 45            | Yellow |
+// | Storage Closet | 56            | Red    |
+// | Bedroom        | 182           | Orange |
+// | Bathroom       | 100           | Teal   |
+// | Living room    | 265           | Grey   |
+// | Coat closet    | 30            | Pink   |
+// | Bike Storage   | 65            | Purple |
 
 // TODO
 // [ ] - Unit tests
