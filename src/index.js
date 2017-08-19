@@ -4,7 +4,7 @@ const countOccurrences = (string, whatToLookFor) => {
 }
 
 const getColumnCount = (data) => {
-  let row = data.split["\\n"]
+  let row = data.split("\n")
   if (row === undefined) {
     row = data
   } else {
@@ -40,12 +40,9 @@ const createColumns = (data) => {
 }
 
 const createDataColumns = (data) => {
-  console.log("createDataColumns - data", data)
+  const rows = data.split("\n")
   const columns = createColumns(data)
   const numberOfColumns = columns.length
-
-  const rows = data.split["\\n"]
-  console.log("createDataColumns - rows", rows)
 
   for (const row of rows) {
     for (let column = 0; column < numberOfColumns; column++) {
@@ -73,7 +70,7 @@ const findColumnWidths = (columns) => {
 
 const csvToMd = (data) => {
   const hasHeaders = true
-  const rows = data.split("\\n")
+  const rows = data.split("\n")
 
   if (hasHeaders) {
     const columns = createDataColumns(data)
