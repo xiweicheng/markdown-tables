@@ -65,18 +65,19 @@ const unitTest = () => {
     assert.equal(actual, expected, "`getLongestElementLength` test")
 
     expected = 3
-    let testArray = []
-    csvToMd.createColumnArrays(3, testArray)
-    actual = testArray.length
-    assert.equal(actual, expected, "`createColumnArrays` test")
+    let testString = "yellow, blue, red"
+    actual = csvToMd.createColumns(testString)
+    actual = actual.length
+    assert.equal(actual, expected, "`createColumns` test")
 
     expected = [["1", "a"], ["2", "b"], ["3", "c"]]
-    const testData = ["1,2,3", "a,b,c"]
-    // TODO Start here - unit test is failing
-    testArray = [[], [], []]
-    csvToMd.pushColumnElementsIntoColumns(testData, 3, testArray)
-    actual = testArray
-    assert.deepEqual(actual, expected, "`pushColumnElementsIntoColumns` test")
+    testString = "1,2,3\na,b,c"
+    actual = csvToMd.createDataColumns(testString)
+    assert.deepEqual(actual, expected, "`createDataColumns` test")
+
+//    expected = [5, 10, 4]
+//    testArray = ["apple", "JavaScript", "blue"]
+//    actual =
 
     assert.end()
   })
@@ -89,4 +90,4 @@ getInput()
   .then(() => unitTest())
   .then(() => endToEndTest())
   // eslint-disable-next-line no-console
-  .catch((error) => console.log(error))
+  .catch((error) => console.log(`Error!! ${error}`))

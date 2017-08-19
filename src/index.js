@@ -3,7 +3,13 @@ const countOccurrences = (string, whatToLookFor) => {
   return (string.match(regExp) || []).length
 }
 
-const getColumnCount = (row) => {
+const getColumnCount = (data) => {
+  let row = data.split["\\n"]
+  if (row === undefined) {
+    row = data
+  } else {
+    row = row[0]
+  }
   return countOccurrences(row, ",") + 1
 }
 
@@ -22,13 +28,25 @@ const getLongestElementLength = (column) => {
   return longest
 }
 
-const createColumnArrays = (numberOfColumns, columns) => {
+const createColumns = (data) => {
+  const columns = []
+  const numberOfColumns = getColumnCount(data)
+
   for (let column = 0; column < numberOfColumns; column++) {
     columns.push([])
   }
+
+  return columns
 }
 
-const pushColumnElementsIntoColumns = (rows, numberOfColumns, columns) => {
+const createDataColumns = (data) => {
+  console.log("createDataColumns - data", data)
+  const columns = createColumns(data)
+  const numberOfColumns = columns.length
+
+  const rows = data.split["\\n"]
+  console.log("createDataColumns - rows", rows)
+
   for (const row of rows) {
     for (let column = 0; column < numberOfColumns; column++) {
       const element = row.split(",")
@@ -37,29 +55,29 @@ const pushColumnElementsIntoColumns = (rows, numberOfColumns, columns) => {
       }
     }
   }
+
+  return columns
 }
 
-const findTableWidths = (numberOfColumns, columns, columnWidths) => {
+const findColumnWidths = (columns) => {
+  const columnWidths = []
+ const numberOfColumns = columns.length
+
   for (let column = 0; column < numberOfColumns; column++) {
     const longest = getLongestElementLength(columns[column])
     columnWidths.push(longest)
   }
+
+  return columnWidths
 }
 
-const csvToMd = (input) => {
+const csvToMd = (data) => {
   const hasHeaders = true
-
-  const rows = input.split("\n")
+  const rows = data.split("\\n")
 
   if (hasHeaders) {
-    const headerRow = rows[0]
-    const numberOfColumns = getColumnCount(headerRow)
-    const columns = []
-    const columnWidths = []
-
-    createColumnArrays(numberOfColumns, columns)
-    pushColumnElementsIntoColumns(rows, numberOfColumns, columns)
-    findTableWidths(numberOfColumns, columns, columnWidths)
+    const columns = createDataColumns(data)
+    const columnWidths = findColumnWidths(columns)
   }
   return "//TODO"
 }
@@ -68,8 +86,9 @@ module.exports = csvToMd
 module.exports.countOccurrences = countOccurrences
 module.exports.getColumnCount = getColumnCount
 module.exports.getLongestElementLength = getLongestElementLength
-module.exports.createColumnArrays = createColumnArrays
-module.exports.pushColumnElementsIntoColumns = pushColumnElementsIntoColumns
+module.exports.createColumns = createColumns
+module.exports.createDataColumns = createDataColumns
+module.exports.findColumnWidths = findColumnWidths
 
 // | Label          | SquareFootage | Color  |
 // |----------------|---------------|--------|
