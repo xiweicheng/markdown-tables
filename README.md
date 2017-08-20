@@ -1,9 +1,9 @@
 # **Still In Development**
-# csv-to-md
+# markdown-tables
 
-![csv-to-md-logo](./media/csv-to-md-logo.png)
+![markdown-tables-logo](./media/markdown-tables-logo.png)
 
-[![Build Status](https://travis-ci.org/matt-jarrett/csv-to-md.svg?branch=master)](https://travis-ci.org/matt-jarrett/csv-to-md)
+[![Build Status](https://travis-ci.org/matt-jarrett/markdown-tables.svg?branch=master)](https://travis-ci.org/matt-jarrett/markdown-tables)
 
 #### What & Why
 

@@ -9,8 +9,8 @@ If you're on a Mac, I'd suggest using
 [Homebrew](https://brew.sh/) for installing the
 required software listed in Setup.
 ```
-git https://github.com/matt-jarrett/csv-to-md.git
-cd csv-to-md
+git https://github.com/matt-jarrett/markdown-tables.git
+cd markdown-tables
 npm install
 ```
 

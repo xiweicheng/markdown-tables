@@ -94,7 +94,7 @@ const getColumnHyphens = (element, columnWidth) => {
   return output
 }
 
-const csvToMd = (data) => {
+const markdownTables = (data) => {
   const hasHeaders = true
   const rows = data.split("\n")
   let output = ""
@@ -132,7 +132,7 @@ const csvToMd = (data) => {
   return output
 }
 
-module.exports = csvToMd
+module.exports = markdownTables
 module.exports.countOccurrences = countOccurrences
 module.exports.getColumnCount = getColumnCount
 module.exports.getLongestElementLength = getLongestElementLength
@@ -143,9 +143,10 @@ module.exports.getColumnSpaces = getColumnSpaces
 module.exports.getColumnHyphens = getColumnHyphens
 
 // TODO
-// [ ] - Unit tests
+// [x] - Unit tests
 // [x] - Find longest header or data value for every column
 // [x] - Math the table spacing for every column
 // [x] - Make the table
+// [x] - Find available name
 // [ ] - Add optional header support
 // [ ] - Add optional different seperator support

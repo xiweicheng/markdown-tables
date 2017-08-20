@@ -1,5 +1,5 @@
 {
-  "name": "csv-to-md",
+  "name": "markdown-tables",
   "version": "0.1.0",
   "description": "Helping the world move Excel table data into Markdown tables.",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matt-jarrett/csv-to-md.git"
+    "url": "git+https://github.com/matt-jarrett/markdown-tables.git"
   },
   "keywords": [
     "csv",
@@ -23,9 +23,9 @@
   "author": "Matt Jarrett",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matt-jarrett/csv-to-md/issues"
+    "url": "https://github.com/matt-jarrett/markdown-tables/issues"
   },
-  "homepage": "https://github.com/matt-jarrett/csv-to-md#readme",
+  "homepage": "https://github.com/matt-jarrett/markdown-tables#readme",
   "devDependencies": {
     "eslint": "~4.4.1",
     "tap-spec": "~4.1.1",

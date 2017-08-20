@@ -1,7 +1,7 @@
 const fs = require("fs")
 const tape = require("tape")
 
-const csvToMd = require("../src/index.js")
+const markdownTables = require("../src/index.js")
 
 let input
 let expected
@@ -37,9 +37,9 @@ const setExpected = (data) => {
 }
 
 const endToEndTest = () => {
-  tape("csv-to-md end to end test", (assert) => {
+  tape("markdown-tables end to end test", (assert) => {
     assert.plan(1)
-    const actual = csvToMd(input)
+    const actual = markdownTables(input)
     assert.equal(actual, expected, "Converts csv to md table as expected")
     assert.end()
   })
@@ -53,39 +53,39 @@ const unitTest = () => {
     let actual
 
     expected = 2
-    actual = csvToMd.countOccurrences("JavaScript", "a")
+    actual = markdownTables.countOccurrences("JavaScript", "a")
     assert.equal(actual, expected, "`countOccurrences` test")
 
     expected = 3
-    actual = csvToMd.getColumnCount("a, b, c")
+    actual = markdownTables.getColumnCount("a, b, c")
     assert.equal(actual, expected, "`getColumnCount` test")
 
     expected = 10
-    actual = csvToMd.getLongestElementLength(["Java", "JavaScript", "Ruby"])
+    actual = markdownTables.getLongestElementLength(["Java", "JavaScript", "Ruby"])
     assert.equal(actual, expected, "`getLongestElementLength` test")
 
     expected = 3
     let testData = "yellow, blue, red"
-    actual = csvToMd.createColumns(testData)
+    actual = markdownTables.createColumns(testData)
     actual = actual.length
     assert.equal(actual, expected, "`createColumns` test")
 
     expected = [["1", "a"], ["2", "b"], ["3", "c"]]
     testData = "1,2,3\na,b,c"
-    actual = csvToMd.createDataColumns(testData)
+    actual = markdownTables.createDataColumns(testData)
     assert.deepEqual(actual, expected, "`createDataColumns` test")
 
     expected = [10, 6]
     testData = [["I", "Love", "JavaScript"], ["red", "purple", "blue"]]
-    actual = csvToMd.findColumnWidths(testData)
+    actual = markdownTables.findColumnWidths(testData)
     assert.deepEqual(actual, expected, "`findColumnWidths` test")
 
     expected = "  "
-    actual = csvToMd.getColumnSpaces("red", 5)
+    actual = markdownTables.getColumnSpaces("red", 5)
     assert.deepEqual(actual, expected, "`getColumnSpaces` test")
 
     expected = "----"
-    actual = csvToMd.getColumnHyphens("green", 9)
+    actual = markdownTables.getColumnHyphens("green", 9)
     assert.deepEqual(actual, expected, "`getColumnHyphens` test")
 
     assert.end()
