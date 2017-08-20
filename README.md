@@ -37,7 +37,7 @@ You use `markdown-tables` as such:
 ```
 const markdownTables = require("markdown-tables")
 ...
-markdownTables(csvData)
+const markdownTable = markdownTables(csvData)
 ```
 
 #### Want to contribute to Markdown Tables?
