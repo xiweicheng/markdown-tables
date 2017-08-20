@@ -60,8 +60,8 @@ const unitTest = () => {
     actual = markdownTables.getColumnCount("a, b, c")
     assert.equal(actual, expected, "`getColumnCount` test")
 
-    expected = 10
-    actual = markdownTables.getLongestElementLength(["Java", "JavaScript", "Ruby"])
+    expected = 4
+    actual = markdownTables.getLongestElementLength(["Go", "C", "Ruby"])
     assert.equal(actual, expected, "`getLongestElementLength` test")
 
     expected = 3
