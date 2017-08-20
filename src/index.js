@@ -141,12 +141,3 @@ module.exports.createDataColumns = createDataColumns
 module.exports.findColumnWidths = findColumnWidths
 module.exports.getColumnSpaces = getColumnSpaces
 module.exports.getColumnHyphens = getColumnHyphens
-
-// TODO
-// [x] - Unit tests
-// [x] - Find longest header or data value for every column
-// [x] - Math the table spacing for every column
-// [x] - Make the table
-// [x] - Find available name
-// [ ] - Add optional header support
-// [ ] - Add optional different seperator support
