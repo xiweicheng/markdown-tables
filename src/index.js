@@ -58,7 +58,7 @@ const createDataColumns = (data) => {
 
 const findColumnWidths = (columns) => {
   const columnWidths = []
- const numberOfColumns = columns.length
+  const numberOfColumns = columns.length
 
   for (let column = 0; column < numberOfColumns; column++) {
     const longest = getLongestElementLength(columns[column])
@@ -68,15 +68,68 @@ const findColumnWidths = (columns) => {
   return columnWidths
 }
 
+const getColumnSpaces = (element, columnWidth) => {
+  let output = ""
+
+  if (element !== undefined) {
+    const spacesNeeded = columnWidth - element.length
+    for (let spaces = 0; spaces < spacesNeeded; spaces++) {
+      output += " "
+    }
+  }
+
+  return output
+}
+
+const getColumnHyphens = (element, columnWidth) => {
+  let output = ""
+
+  if (element !== undefined) {
+    const hyphensNeeded = columnWidth - element.length
+    for (let hyphens = 0; hyphens < hyphensNeeded; hyphens++) {
+      output += "-"
+    }
+  }
+
+  return output
+}
+
 const csvToMd = (data) => {
   const hasHeaders = true
   const rows = data.split("\n")
+  let output = ""
 
-  if (hasHeaders) {
-    const columns = createDataColumns(data)
-    const columnWidths = findColumnWidths(columns)
+  const columns = createDataColumns(data)
+  const numberOfColumns = columns.length
+  const columnWidths = findColumnWidths(columns)
+
+  for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+    const headerRow = rowIndex === 1
+
+    if (headerRow && hasHeaders) {
+      for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+        const hyphens = getColumnHyphens("", columnWidths[columnIndex])
+        output += `|-${hyphens}-`
+        if (columnIndex === numberOfColumns - 1) {
+          output += "|\n"
+        }
+      }
+    }
+
+    for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+      const element = columns[columnIndex][rowIndex]
+
+      if (element !== undefined) {
+        const spaces = getColumnSpaces(element, columnWidths[columnIndex])
+        output += `| ${element}${spaces} `
+        if (columnIndex === numberOfColumns - 1) {
+          output += "|\n"
+        }
+      }
+    }
   }
-  return "//TODO"
+
+  return output
 }
 
 module.exports = csvToMd
@@ -86,23 +139,13 @@ module.exports.getLongestElementLength = getLongestElementLength
 module.exports.createColumns = createColumns
 module.exports.createDataColumns = createDataColumns
 module.exports.findColumnWidths = findColumnWidths
-
-// | Label          | SquareFootage | Color  |
-// |----------------|---------------|--------|
-// | Office         | 224           | Blue   |
-// | Kitchen        | 230           | Green  |
-// | Clothes Closet | 45            | Yellow |
-// | Storage Closet | 56            | Red    |
-// | Bedroom        | 182           | Orange |
-// | Bathroom       | 100           | Teal   |
-// | Living room    | 265           | Grey   |
-// | Coat closet    | 30            | Pink   |
-// | Bike Storage   | 65            | Purple |
+module.exports.getColumnSpaces = getColumnSpaces
+module.exports.getColumnHyphens = getColumnHyphens
 
 // TODO
 // [ ] - Unit tests
 // [x] - Find longest header or data value for every column
-// [ ] - Math the table spacing for every column
-// [ ] - Make the table
+// [x] - Math the table spacing for every column
+// [x] - Make the table
 // [ ] - Add optional header support
 // [ ] - Add optional different seperator support
