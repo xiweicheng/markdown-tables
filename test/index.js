@@ -47,7 +47,7 @@ const endToEndTest = () => {
 
 const unitTest = () => {
   tape("unit tests", (assert) => {
-    assert.plan(5)
+    assert.plan(8)
 
     let expected
     let actual
@@ -65,19 +65,28 @@ const unitTest = () => {
     assert.equal(actual, expected, "`getLongestElementLength` test")
 
     expected = 3
-    let testString = "yellow, blue, red"
-    actual = csvToMd.createColumns(testString)
+    let testData = "yellow, blue, red"
+    actual = csvToMd.createColumns(testData)
     actual = actual.length
     assert.equal(actual, expected, "`createColumns` test")
 
     expected = [["1", "a"], ["2", "b"], ["3", "c"]]
-    testString = "1,2,3\na,b,c"
-    actual = csvToMd.createDataColumns(testString)
+    testData = "1,2,3\na,b,c"
+    actual = csvToMd.createDataColumns(testData)
     assert.deepEqual(actual, expected, "`createDataColumns` test")
 
-//    expected = [5, 10, 4]
-//    testArray = ["apple", "JavaScript", "blue"]
-//    actual =
+    expected = [10, 6]
+    testData = [["I", "Love", "JavaScript"], ["red", "purple", "blue"]]
+    actual = csvToMd.findColumnWidths(testData)
+    assert.deepEqual(actual, expected, "`findColumnWidths` test")
+
+    expected = "  "
+    actual = csvToMd.getColumnSpaces("red", 5)
+    assert.deepEqual(actual, expected, "`getColumnSpaces` test")
+
+    expected = "----"
+    actual = csvToMd.getColumnHyphens("green", 9)
+    assert.deepEqual(actual, expected, "`getColumnHyphens` test")
 
     assert.end()
   })
