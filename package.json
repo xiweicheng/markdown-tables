@@ -1,6 +1,6 @@
 {
   "name": "markdown-tables",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helping the world move Excel table data into Markdown tables.",
   "main": "src/index.js",
   "scripts": {
